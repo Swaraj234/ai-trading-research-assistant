@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function displayValue(value) {
   if (value === null || value === undefined) return "";
   if (typeof value === "object") return value.value || JSON.stringify(value);
@@ -36,7 +38,7 @@ function App() {
     setTestResult(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/analyze", {
+      const response = await fetch(`${API_URL}/api/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),
@@ -71,7 +73,7 @@ function App() {
         })
       );
 
-      const response = await fetch("http://localhost:5000/api/refine", {
+      const response = await fetch(`${API_URL}/api/refine`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
